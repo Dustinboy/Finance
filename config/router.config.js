@@ -1,22 +1,22 @@
 export default [
   // user
-  // {
-  //   path: '/user',
-  //   component: '../layouts/UserLayout',
-  //   routes: [
-  //     { path: '/user', redirect: '/user/login' },
-  //     { path: '/user/login', name: 'login', component: './User/Login' },
-  //     { path: '/user/register', name: 'register', component: './User/Register' },
-  //     {
-  //       path: '/user/register-result',
-  //       name: 'register.result',
-  //       component: './User/RegisterResult',
-  //     },
-  //     {
-  //       component: '404',
-  //     },
-  //   ],
-  // },
+  {
+    path: '/user',
+    component: '../layouts/BlankLayout.js',
+    routes: [
+      { path: '/user', redirect: '/user/login' },
+      { path: '/user/login', name: 'login', component: './User/Login' },
+      { path: '/user/register', name: 'register', component: './User/Register' },
+      {
+        path: '/user/register-result',
+        name: 'register.result',
+        component: './User/RegisterResult',
+      },
+      {
+        component: '404',
+      },
+    ],
+  },
   // app
   {
     path: '/',
@@ -27,7 +27,7 @@ export default [
       { path: '/', redirect: '/dashboard/analysis', authority: ['admin', 'user'] },
       {
         path: '/dashboard',
-        name: '股市分析及预测',
+        name: 'share',
         icon: 'dashboard',
         routes: [
           {

@@ -42,4 +42,7 @@ export default {
   'menu.editor.flow': '流程编辑器',
   'menu.editor.mind': '脑图编辑器',
   'menu.editor.koni': '拓扑编辑器',
+  'menu.share': '股票市场大图',
+  'menu.share.analysis': '股票分析及预测',
+  'menu.share.monitor': '股票检测',
 };
