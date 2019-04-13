@@ -26,6 +26,13 @@ class SearchList extends Component {
   handleFormSubmit = value => {
     // eslint-disable-next-line
     console.log(value);
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'list/fetch',
+      payload: {
+        count: 5,
+      },
+    });
   };
 
   render() {
@@ -34,14 +41,14 @@ class SearchList extends Component {
         key: 'articles',
         tab: '文章',
       },
-      {
-        key: 'projects',
-        tab: '项目',
-      },
-      {
-        key: 'applications',
-        tab: '应用',
-      },
+      // {
+      //   key: 'projects',
+      //   tab: '项目',
+      // },
+      // {
+      //   key: 'applications',
+      //   tab: '应用',
+      // },
     ];
 
     const mainSearch = (

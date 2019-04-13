@@ -130,7 +130,7 @@ class SearchList extends Component {
 
     return (
       <Fragment>
-        <Card bordered={false}>
+        {/* <Card bordered={false}>
           <Form layout="inline">
             <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
               <FormItem>
@@ -201,7 +201,7 @@ class SearchList extends Component {
               </Row>
             </StandardFormRow>
           </Form>
-        </Card>
+        </Card> */}
         <Card
           style={{ marginTop: 24 }}
           bordered={false}
