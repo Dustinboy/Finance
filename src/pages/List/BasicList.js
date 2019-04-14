@@ -111,6 +111,25 @@ class BasicList extends PureComponent {
     });
   };
 
+  renderItemStyle = (status) => {
+    if (status == 0) {
+      return {
+        textAlign: 'center',
+        color: '#1890ff'
+      }
+    } else if (status == -1) {
+      return {
+        textAlign: 'center',
+        color: '#f5222d'
+      }
+    } else {
+      return {
+        textAlign: 'center',
+        color: '#52c41a'
+      }
+    }
+  }
+
   render() {
     const {
       list: { list },
@@ -148,12 +167,12 @@ class BasicList extends PureComponent {
 
     const extraContent = (
       <div className={styles.extraContent}>
-        <RadioGroup defaultValue="all">
+        {/* <RadioGroup defaultValue="all">
           <RadioButton value="all">全部</RadioButton>
           <RadioButton value="progress">进行中</RadioButton>
           <RadioButton value="waiting">等待中</RadioButton>
         </RadioGroup>
-        <Search className={styles.extraContentSearch} placeholder="请输入" onSearch={() => ({})} />
+        <Search className={styles.extraContentSearch} placeholder="请输入" onSearch={() => ({})} /> */}
       </div>
     );
 
@@ -167,15 +186,16 @@ class BasicList extends PureComponent {
     const ListContent = ({ data: { owner, createdAt, percent, status } }) => (
       <div className={styles.listContent}>
         <div className={styles.listContentItem}>
-          <span>Owner</span>
+          <span>评论人</span>
           <p>{owner}</p>
         </div>
         <div className={styles.listContentItem}>
-          <span>开始时间</span>
+          <span>发表时间</span>
           <p>{moment(createdAt).format('YYYY-MM-DD HH:mm')}</p>
         </div>
         <div className={styles.listContentItem}>
-          <Progress percent={percent} status={status} strokeWidth={6} style={{ width: 180 }} />
+          <span>情绪值</span>
+          <p style={this.renderItemStyle(status)} className={`emotion-${status}`}>{status}</p>
         </div>
       </div>
     );
@@ -255,7 +275,7 @@ class BasicList extends PureComponent {
     return (
       <PageHeaderWrapper>
         <div className={styles.standardList}>
-          <Card bordered={false}>
+          {/* <Card bordered={false}>
             <Row>
               <Col sm={8} xs={24}>
                 <Info title="我的待办" value="8个任务" bordered />
@@ -267,29 +287,16 @@ class BasicList extends PureComponent {
                 <Info title="本周完成任务数" value="24个任务" />
               </Col>
             </Row>
-          </Card>
+          </Card> */}
 
           <Card
             className={styles.listCard}
             bordered={false}
-            title="标准列表"
+            title="情感度分析"
             style={{ marginTop: 24 }}
             bodyStyle={{ padding: '0 32px 40px 32px' }}
             extra={extraContent}
           >
-            <Button
-              type="dashed"
-              style={{ width: '100%', marginBottom: 8 }}
-              icon="plus"
-              onClick={this.showModal}
-              ref={component => {
-                /* eslint-disable */
-                this.addBtn = findDOMNode(component);
-                /* eslint-enable */
-              }}
-            >
-              添加
-            </Button>
             <List
               size="large"
               rowKey="id"
@@ -298,17 +305,7 @@ class BasicList extends PureComponent {
               dataSource={list}
               renderItem={item => (
                 <List.Item
-                  actions={[
-                    <a
-                      onClick={e => {
-                        e.preventDefault();
-                        this.showEditModal(item);
-                      }}
-                    >
-                      编辑
-                    </a>,
-                    <MoreBtn current={item} />,
-                  ]}
+
                 >
                   <List.Item.Meta
                     avatar={<Avatar src={item.logo} shape="square" size="large" />}

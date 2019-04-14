@@ -127,12 +127,13 @@ class Analysis extends Component {
 
     const activeKey = currentTabKey || (offlineData[0] && offlineData[0].name);
 
+    console.log('data', offlineData, offlineChartData, activeKey)
     return (
       <GridContent>
         {/* <Suspense fallback={<PageLoading />}>
           <IntroduceRow loading={loading} visitData={visitData} />
         </Suspense> */}
-        <Suspense fallback={null}>
+        {/* <Suspense fallback={null}>
           <SalesCard
             rangePickerValue={rangePickerValue}
             salesData={salesData}
@@ -141,8 +142,8 @@ class Analysis extends Component {
             loading={loading}
             selectDate={this.selectDate}
           />
-        </Suspense>
-        <div className={styles.twoColLayout}>
+        </Suspense> */}
+        {/* <div className={styles.twoColLayout}>
           <Row gutter={24}>
             <Col xl={12} lg={24} md={24} sm={24} xs={24}>
               <Suspense fallback={null}>
@@ -167,7 +168,7 @@ class Analysis extends Component {
               </Suspense>
             </Col>
           </Row>
-        </div>
+        </div> */}
         <Suspense fallback={null}>
           <OfflineData
             activeKey={activeKey}

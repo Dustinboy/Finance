@@ -38,7 +38,7 @@ export default [
           {
             path: '/dashboard/monitor',
             name: 'monitor',
-            component: './Dashboard/Monitor',
+            component: './List/BasicList',
           },
           // {
           //   path: '/dashboard/workplace',

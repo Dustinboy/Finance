@@ -8,6 +8,7 @@ export default {
   'app.analysis.visits-ranking': '股票访问量排名',
   'app.analysis.day-visits': '日访问量',
   'app.analysis.week': '周同比',
+  'app.analysis.price': '价格',
   'app.analysis.day': '日同比',
   'app.analysis.payments': '支付笔数',
   'app.analysis.conversion-rate': '转化率',

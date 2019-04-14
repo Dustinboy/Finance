@@ -123,11 +123,10 @@ for (let i = 0; i < 10; i += 1) {
   });
 }
 const offlineChartData = [];
-for (let i = 0; i < 20; i += 1) {
+for (let i = 0; i < 24; i += 1) {
   offlineChartData.push({
     x: new Date().getTime() + 1000 * 60 * 30 * i,
-    y1: Math.floor(Math.random() * 100) + 10,
-    y2: Math.floor(Math.random() * 100) + 10,
+    y1: Math.floor(Math.random() * 10) + 3000,
   });
 }
 

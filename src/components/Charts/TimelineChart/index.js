@@ -34,8 +34,8 @@ class TimelineChart extends React.Component {
 
     const ds = new DataSet({
       state: {
-        start: data[0].x,
-        end: data[data.length - 1].x,
+        start: data[0] ? data[0].x : 0,
+        end: data[data.length - 1] ? data[data.length - 1].x : 0,
       },
     });
 
@@ -66,16 +66,17 @@ class TimelineChart extends React.Component {
 
     const timeScale = {
       type: 'time',
-      tickInterval: 60 * 60 * 1000,
+      tickInterval: 60 * 30 * 1000,
       mask: 'HH:mm',
       range: [0, 1],
     };
 
+ 
     const cols = {
       x: timeScale,
       value: {
         max,
-        min: 0,
+        min: 2990,
       },
     };
 
@@ -100,13 +101,16 @@ class TimelineChart extends React.Component {
 
     return (
       <div className={styles.timelineChart} style={{ height: height + 30 }}>
+        <div style={{fontWeight:600}}>
+          上证指数趋势预测
+        </div>
         <div>
           {title && <h4>{title}</h4>}
           <Chart height={height} padding={padding} data={dv} scale={cols} forceFit>
             <Axis name="x" />
             <Tooltip />
             <Legend name="key" position="top" />
-            <Geom type="line" position="x*value" size={borderWidth} color="key" />
+            <Geom type="line" position="x*value" size={borderWidth} color="key" shape={"smooth"} />
           </Chart>
           <div style={{ marginRight: -20 }}>
             <SliderGen />
