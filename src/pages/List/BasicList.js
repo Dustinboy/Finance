@@ -50,7 +50,8 @@ class BasicList extends PureComponent {
     dispatch({
       type: 'list/fetch',
       payload: {
-        count: 5,
+        page: 0,
+        count: 8,
       },
     });
   }
@@ -134,6 +135,7 @@ class BasicList extends PureComponent {
     const {
       list: { list },
       loading,
+      dispatch
     } = this.props;
     const {
       form: { getFieldDecorator },
@@ -179,23 +181,32 @@ class BasicList extends PureComponent {
     const paginationProps = {
       showSizeChanger: true,
       showQuickJumper: true,
-      pageSize: 5,
+      pageSize: 10,
       total: 50,
+      onChange: (page) => {
+        dispatch({
+          type: 'list/fetch',
+          payload: {
+            page: page - 1,
+            count: 8, 
+          },
+        });
+      }
     };
 
     const ListContent = ({ data: { owner, createdAt, percent, status } }) => (
       <div className={styles.listContent}>
-        <div className={styles.listContentItem}>
+        {/* <div className={styles.listContentItem}>
           <span>评论人</span>
           <p>{owner}</p>
         </div>
         <div className={styles.listContentItem}>
           <span>发表时间</span>
           <p>{moment(createdAt).format('YYYY-MM-DD HH:mm')}</p>
-        </div>
+        </div> */}
         <div className={styles.listContentItem}>
-          <span>情绪值</span>
-          <p style={this.renderItemStyle(status)} className={`emotion-${status}`}>{status}</p>
+          <span style={this.renderItemStyle(status)}>情绪值：{status}</span>
+          {/* <p style={this.renderItemStyle(status)} className={`emotion-${status}`}>{status}</p> */}
         </div>
       </div>
     );
@@ -308,9 +319,9 @@ class BasicList extends PureComponent {
 
                 >
                   <List.Item.Meta
-                    avatar={<Avatar src={item.logo} shape="square" size="large" />}
-                    title={<a href={item.href}>{item.title}</a>}
-                    description={item.subDescription}
+                    // avatar={<Avatar src={item.logo} shape="square" size="large" />}
+                    title={<a href={item.url}>{item.title}</a>}
+                    // description={item.subDescription}
                   />
                   <ListContent data={item} />
                 </List.Item>
