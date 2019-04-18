@@ -38,7 +38,7 @@ const { Search, TextArea } = Input;
 }))
 @Form.create()
 class BasicList extends PureComponent {
-  state = { visible: false, done: false };
+  state = { visible: false, done: false, searchKey: '' };
 
   formLayout = {
     labelCol: { span: 7 },
@@ -50,6 +50,7 @@ class BasicList extends PureComponent {
     dispatch({
       type: 'list/fetch',
       payload: {
+        searchKey: '',
         page: 0,
         count: 8,
       },
@@ -131,16 +132,31 @@ class BasicList extends PureComponent {
     }
   }
 
+  handleFormSubmit = (value) => {
+    this.setState({
+      searchKey: value
+    });
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'list/fetch',
+      payload: {
+        searchKey: value,
+        page: 0,
+        count: 8, 
+      },
+    });
+  }
+
   render() {
     const {
       list: { list },
       loading,
-      dispatch
+      dispatch,
     } = this.props;
     const {
       form: { getFieldDecorator },
     } = this.props;
-    const { visible, done, current = {} } = this.state;
+    const { visible, done, current = {}, searchKey } = this.state;
 
     const editAndDelete = (key, currentItem) => {
       if (key === 'edit') this.showEditModal(currentItem);
@@ -182,11 +198,12 @@ class BasicList extends PureComponent {
       showSizeChanger: true,
       showQuickJumper: true,
       pageSize: 10,
-      total: 50,
+      total: 400,
       onChange: (page) => {
         dispatch({
           type: 'list/fetch',
           payload: {
+            searchKey,
             page: page - 1,
             count: 8, 
           },
@@ -299,7 +316,15 @@ class BasicList extends PureComponent {
               </Col>
             </Row>
           </Card> */}
-
+          <div style={{ textAlign: 'center' }}>
+            <Input.Search
+              placeholder="请输入股票代码"
+              enterButton="搜索"
+              size="large"
+              onSearch={value => this.handleFormSubmit(value)}
+              style={{ width: 522 }}
+            />
+          </div>
           <Card
             className={styles.listCard}
             bordered={false}
@@ -320,8 +345,8 @@ class BasicList extends PureComponent {
                 >
                   <List.Item.Meta
                     // avatar={<Avatar src={item.logo} shape="square" size="large" />}
-                    title={<a href={item.url}>{item.title}</a>}
-                    // description={item.subDescription}
+                    title={<a target="_blank" href={item.URL}>{item.Title}</a>}
+                    description={`股票名称：${item.stockName}`}
                   />
                   <ListContent data={item} />
                 </List.Item>

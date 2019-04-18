@@ -202,7 +202,7 @@ class SearchList extends Component {
             </StandardFormRow>
           </Form>
         </Card> */}
-        <Card
+        {/* <Card
           style={{ marginTop: 24 }}
           bordered={false}
           bodyStyle={{ padding: '8px 32px 32px 32px' }}
@@ -242,7 +242,7 @@ class SearchList extends Component {
               </List.Item>
             )}
           />
-        </Card>
+        </Card> */}
       </Fragment>
     );
   }

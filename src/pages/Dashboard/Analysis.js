@@ -1,6 +1,7 @@
 import React, { Component, Suspense } from 'react';
 import { connect } from 'dva';
-import { Row, Col, Icon, Menu, Dropdown } from 'antd';
+import { Row, Col, Icon, Menu, Dropdown, Card } from 'antd';
+import { Pie, WaterWave, Gauge, TagCloud } from '@/components/Charts';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import { getTimeDistance } from '@/utils/utils';
 import styles from './Analysis.less';
@@ -92,7 +93,6 @@ class Analysis extends Component {
   render() {
     const { rangePickerValue, salesType, currentTabKey } = this.state;
     const { chart, loading } = this.props;
-    console.log(chart);
     const {
       visitData,
       visitData2,
@@ -127,7 +127,6 @@ class Analysis extends Component {
 
     const activeKey = currentTabKey || (offlineData[0] && offlineData[0].name);
 
-    console.log('data', offlineData, offlineChartData, activeKey)
     return (
       <GridContent>
         {/* <Suspense fallback={<PageLoading />}>
@@ -171,13 +170,21 @@ class Analysis extends Component {
         </div> */}
         <Suspense fallback={null}>
           <OfflineData
-            activeKey={activeKey}
-            loading={loading}
-            offlineData={offlineData}
-            offlineChartData={offlineChartData}
-            handleTabChange={this.handleTabChange}
-          />
+          activeKey={activeKey}
+          loading={loading}
+          offlineData={offlineData}
+          offlineChartData={offlineChartData}
+          handleTabChange={this.handleTabChange}
+        />
         </Suspense>
+        <Card
+          title="用户最喜爱的股票"
+          style={{ width: 300, marginTop: '30px' }}
+        >
+          <a href="" target="_blank" style={{display:'block', marginTop:'6px'}}>股票1</a>
+          <a href="" target="_blank" style={{display:'block', marginTop:'6px'}}>股票1</a>
+          <a href="" target="_blank" style={{display:'block', marginTop:'6px'}}>股票1</a>
+        </Card>
       </GridContent>
     );
   }
